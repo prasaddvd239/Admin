@@ -1,27 +1,27 @@
 const initState = {
   list: [],
 
-  refadm: {},
+  refemp: {},
 };
 
 // ACTION TYPES
-const ADMIN_CREATE = "ADMIN_CREATE";
-const ADMIN_UPDATE = "ADMIN_UPDATE";
-const ADMIN_DELETE = "ADMIN_DELETE";
-const ADMIN_GET_ALL = "ADMIN_GET_ALL";
-const ADMIN_GET_BY_ID = "ADMIN_GET_BY_ID";
+const POLICY_CREATE = "POLICY_CREATE";
+const POLICY_UPDATE = "POLICY_UPDATE";
+const POLICY_DELETE = "POLICY_DELETE";
+const POLICY_GET_ALL = "POLICY_GET_ALL";
+const POLICY_GET_BY_ID = "POLICY_GET_BY_ID";
 
-const REF_ADMIN = "REF_ADMIN";
+const REF_POLICY = "REF_POLICY";
 
 // ACTIONS :: COmponents are interacting with this action
-export function createAdminAction(payload) {
+export function createPolicyAction(payload) {
   // return { type: EMPLOYEE_CREATE, payload: payload };
 
   // MAKE SURE redux-thunk is installed.
   return async (dispatch) => {
     // WE HV TO CALL THE SPRINT1 / SPRING BOOT
-    const url = "http://localhost:8080/api/admin/addadmin";
-    const requestBody = { ...payload, age: 30 };
+    const url = "http://localhost:8080/api/policy/create";
+    const requestBody = { ...payload };
 
     // HTTP Client
     await fetch(url, {
@@ -31,16 +31,16 @@ export function createAdminAction(payload) {
     });
 
     // UPDATE THE UI
-    dispatch({ type: ADMIN_CREATE, payload: payload });
+    dispatch({ type: POLICY_CREATE, payload: payload });
   };
 }
 
-export function updateAdminAction(payload) {
+export function updatePolicyAction(payload) {
   // return { type: EMPLOYEE_UPDATE, payload: payload };
   return async (dispatch) => {
     // WE HV TO CALL THE SPRINT1 / SPRING BOOT
-    const url = `http://localhost:8080/api/admin/changepassword/${payload.id}`;
-    const requestBody = { ...payload, age: 25 };
+    const url = `http://localhost:8080/api/policy/update/${payload.id}`;
+    const requestBody = { ...payload };
 
     await fetch(url, {
       method: "PUT",
@@ -49,81 +49,81 @@ export function updateAdminAction(payload) {
     });
 
     // update the ui.
-    dispatch(updateRefAdmin({}));
+    dispatch(updateRefPolicy({}));
   };
 }
 
-export function deleteAdminAction(payload) {
+export function deletePolicyAction(payload) {
   // return { type: EMPLOYEE_DELETE, payload: payload };
 
   // redux thunk
   return async (dispatch) => {
-    const url = `http://localhost:8080/api/admin/removeadmin/${payload.id}`;
+    const url = `http://localhost:8080/api/policy/delete/${payload.id}`;
     await fetch(url, { method: "DELETE" });
 
     // update the ui.
-    dispatch(getAllAdminAction());
+    dispatch(getAllPolicyAction());
   };
 }
 
-export function getAllAdminAction(payload) {
+export function getAllPolicyAction(payload) {
   // return { type: EMPLOYEE_GET_ALL, payload: payload };
 
   // API CALL/BACKEND CALL / REDUX-THUNK IS THERE
   return async (dispatch) => {
     // WE HV TO CALL THE SPRINT1 / SPRING BOOT
-    const url = "http://localhost:8080/api/admin/getalladmins";
+    const url = "http://localhost:8080/api/policy/all";
 
     // HTTP Client / POSTMAN / SWAGGER
     const response = await fetch(url);
-    const adminList = await response.json();
-    console.log(adminList);
+    const policyList = await response.json();
+    console.log(policyList);
 
     // Update the UI
-    dispatch({ type: ADMIN_GET_ALL, payload: adminList });
+    dispatch({ type: POLICY_GET_ALL, payload: policyList });
   };
 }
 
-export function getByIdAdminAction(payload) {
+export function getByIdPolicyAction(payload) {
   // return { type: EMPLOYEE_GET_BY_ID, payload: payload };
   return async (dispatch) => {
-    const url = `http://localhost:8080/api/admin/getadmin/${payload.id}`;
+    const url = `http://localhost:8080/api/policy/findby/${payload.id}`;
     const response = await fetch(url);
-    const adminObj = await response.json();
+    const policyObj = await response.json();
 
     // this wil update the refemp
-    dispatch(updateRefAdmin(adminObj));
+    dispatch(updateRefPolicy(policyObj));
   };
 }
 
-export function updateRefAdmin(payload) {
-  return { type: REF_ADMIN, payload: payload };
+export function updateRefPolicy(payload) {
+  return { type: REF_POLICY, payload: payload };
 }
 
 // REDUCER LOGIC
-export function AdminReducer(state = initState, action) {
+export function PolicyReducer(state = initState, action) {
   switch (action.type) {
-    case ADMIN_CREATE:
+    case POLICY_CREATE:
       return { ...state, list: [action.payload, ...state.list] };
-    case ADMIN_UPDATE:
+    case POLICY_UPDATE:
       // TODO
       return state;
-    case ADMIN_DELETE:
+    case POLICY_DELETE:
       // TODO
       const oldList = state.list;
       oldList.splice(action.payload, 1);
       console.log("OL", oldList);
 
       return { ...state, list: [...oldList] };
-    case ADMIN_GET_ALL:
+    case POLICY_GET_ALL:
       // Update the list
       return { ...state, list: action.payload };
-    case ADMIN_GET_BY_ID:
+    case POLICY_GET_BY_ID:
       // TODO
       return state;
 
-    case REF_ADMIN:
-      return { ...state, refadm: action.payload };
+    case REF_POLICY:
+      return { ...state, refemp: action.payload };
 
     default:
       return state;

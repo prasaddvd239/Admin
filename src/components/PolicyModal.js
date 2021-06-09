@@ -1,26 +1,23 @@
 import { Button, ListGroup, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { updateRefAdmin } from "../redux/AdminReducer";
+import { updateRefPolicy } from "../redux/PolicyReducer";
 
-export function AdminModal() {
+export function PolicyModal() {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
 
   const updateRefObj = () => {
-    dispatch(updateRefAdmin({}));
+    dispatch(updateRefPolicy({}));
   };
 
   return (
-    <Modal show={state.admin.refadm.id} onHide={() => updateRefObj()}>
-      <Modal.Header closeButton>
-        <Modal.Title>Hello, {state.admin.refadm.userName}</Modal.Title>
-      </Modal.Header>
+    <Modal show={state.policy.refemp.id} onHide={() => updateRefObj()}>
+      <Modal.Header closeButton></Modal.Header>
       <Modal.Body>
         <ListGroup>
           <ListGroup.Item>
-            User Name - {state.admin.refadm.userName}
+            Policy Name - {state.policy.refemp.policyName}
           </ListGroup.Item>
-          <ListGroup.Item>Password - {"*********"}</ListGroup.Item>
         </ListGroup>
       </Modal.Body>
       <Modal.Footer>

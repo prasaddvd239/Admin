@@ -3,10 +3,12 @@ import { applyMiddleware } from "redux";
 import { createStore } from "redux";
 import thunk from "redux-thunk";
 
-import { AdminReducer } from "./AdminReducer";
+import { CustomerReducer } from "./CustomerReducer";
+import { PolicyReducer } from "./PolicyReducer";
 
 const rootReducer = combineReducers({
-  admin: AdminReducer,
+  customer: CustomerReducer,
+  policy: PolicyReducer,
 
   // depart : DepartRducer,
   //vechil: VechuileReucer

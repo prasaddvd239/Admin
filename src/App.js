@@ -1,10 +1,10 @@
 import logo from "./logo.svg";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
-import { AdminUpsert } from "./components/AdminUpsert";
-import { AdminList } from "./components/AdminList";
 import { CustomerUpsert } from "./components/CustomerUpsert";
 import { CustomerList } from "./components/CustomerList";
+import { PolicyList } from "./components/PolicyList";
+import { PolicyUpsert } from "./components/PolicyUpsert";
 import { Nav, Navbar } from "react-bootstrap";
 import { AppNavBar } from "./common/AppNavBar";
 
@@ -16,28 +16,28 @@ function App() {
       </div>
 
       <Switch>
-        <Route path="/create-admin">
-          <AdminUpsert />
-        </Route>
-
-        <Route path="/list-admin">
-          <AdminList />
-        </Route>
-
-        <Route exact path="/">
-          <AdminList />
-        </Route>
-        <Route path="/create-Customer">
+        {/* <Route path="/create-Customer">
           <CustomerUpsert />
-        </Route>
+        </Route> */}
 
         <Route path="/list-Customer">
           <CustomerList />
         </Route>
 
-        <Route exact path="/E">
+        {/* <Route exact path="/">
           <CustomerUpsert />
+        </Route> */}
+        <Route path="/create-policy">
+          <PolicyUpsert />
         </Route>
+
+        <Route path="/list-policy">
+          <PolicyList />
+        </Route>
+
+        {/* <Route exact path="/">
+          <PolicyList />
+        </Route> */}
       </Switch>
     </Router>
   );

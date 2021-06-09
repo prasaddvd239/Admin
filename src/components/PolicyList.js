@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import {
-  deleteAdminAction,
-  getAllAdminAction,
-  getByIdAdminAction,
-  updateRefAdmin,
-} from "../redux/AdminReducer";
-import { AdminModal } from "./AdminModal";
+  deletePolicyAction,
+  getAllPolicyAction,
+  getByIdPolicyAction,
+  updateRefPolicy,
+} from "../redux/PolicyReducer";
+import { PolicyModal } from "./PolicyModal";
 
-export function AdminList() {
+export function PolicyList() {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -19,26 +19,26 @@ export function AdminList() {
 
   // Used to Initialize :: READ THE DATA FROM API
   useEffect(() => {
-    dispatch(getAllAdminAction());
+    dispatch(getAllPolicyAction());
   }, []);
 
-  const deleteAdmin = (item, index) => {
-    dispatch(deleteAdminAction(item));
+  const deletePolicy = (item, index) => {
+    dispatch(deletePolicyAction(item));
 
     setSuccessOperation(true);
     setTimeout(() => setSuccessOperation(false), 2000);
   };
 
-  const updateAdmin = (item) => {
+  const updatePolicy = (item) => {
     // we are doing this so that we can access this objec in the form page
-    dispatch(updateRefAdmin(item));
+    dispatch(updateRefPolicy(item));
 
     // form page
-    history.push("/create-admin");
+    history.push("/create-policy");
   };
 
-  const getAdminById = (item) => {
-    dispatch(getByIdAdminAction(item));
+  const getPolicyById = (item) => {
+    dispatch(getByIdPolicyAction(item));
   };
 
   return (
@@ -46,38 +46,36 @@ export function AdminList() {
       <div className="row">
         <div className="col-3 col-md-2 d-none d-md-block"></div>
         <div className="col-12 col-md-8">
-          <h3 className="alert alert-primary">Admin List</h3>
+          <h3 className="alert alert-secondary">Policy List</h3>
 
           {successOperation && (
-            <div className="alert alert-primary">Operation Success</div>
+            <div className="alert alert-success">Opeation Success</div>
           )}
 
           <table className="table">
-            <thead className="alert alert-primary">
+            <thead className="thead-light">
               <tr>
                 <th scope="col">#ID</th>
-                <th scope="col">USERNAME</th>
-                <th scope="col">PASSWORD</th>
+                <th scope="col">NAME</th>
                 <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
-              {[...state.admin.list].map((item, index) => (
+              {[...state.policy.list].map((item, index) => (
                 <tr key={index}>
                   <th scope="row">{item.id}</th>
-                  <td>{item.userName}</td>
-                  <td>{"********"}</td>
+                  <td>{item.policyName}</td>
                   <td>
                     <input
                       type="button"
-                      onClick={() => getAdminById(item)}
+                      onClick={() => getPolicyById(item)}
                       value="Detail"
                       className="btn btn-link"
                     />
                     /
                     <input
                       type="button"
-                      onClick={() => updateAdmin(item)}
+                      onClick={() => updatePolicy(item)}
                       value="Edit"
                       className="btn btn-link"
                     />
@@ -85,8 +83,8 @@ export function AdminList() {
                     <input
                       type="button"
                       value="Delete"
-                      onClick={() => deleteAdmin(item, index)}
-                      className="btn btn-link text-primary"
+                      onClick={() => deletePolicy(item, index)}
+                      className="btn btn-link text-danger"
                     />
                   </td>
                 </tr>
@@ -97,8 +95,8 @@ export function AdminList() {
         <div className="col-3 col-md-2 d-none d-md-block"></div>
       </div>
 
-      {/** ADMIN MODAL */}
-      <AdminModal />
+      {/** POLICY MODAL */}
+      <PolicyModal />
     </>
   );
 }
