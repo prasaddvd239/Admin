@@ -1,24 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import "./App.css";
+import { AdminUpsert } from "./components/AdminUpsert";
+import { AdminList } from "./components/AdminList";
+import { CustomerUpsert } from "./components/CustomerUpsert";
+import { CustomerList } from "./components/CustomerList";
+import { Nav, Navbar } from "react-bootstrap";
+import { AppNavBar } from "./common/AppNavBar";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="sticky-top">
+        <AppNavBar />
+      </div>
+
+      <Switch>
+        <Route path="/create-admin">
+          <AdminUpsert />
+        </Route>
+
+        <Route path="/list-admin">
+          <AdminList />
+        </Route>
+
+        <Route exact path="/">
+          <AdminList />
+        </Route>
+        <Route path="/create-Customer">
+          <CustomerUpsert />
+        </Route>
+
+        <Route path="/list-Customer">
+          <CustomerList />
+        </Route>
+
+        <Route exact path="/E">
+          <CustomerUpsert />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
