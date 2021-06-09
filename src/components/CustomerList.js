@@ -43,7 +43,7 @@ export function CustomerList() {
       <div className="row alert alert-secondary">
         <div className="col-3 col-md-2 d-none d-md-block"></div>
         <div className="col-12 col-md-8">
-          <h3 className="text-center alert bg-secondary text-dark">
+          <h3 className="text-center alert bg-light text-dark">
             Customer List
           </h3>
 
@@ -52,7 +52,7 @@ export function CustomerList() {
           )}
 
           <table className="table">
-            <thead className=" alert bg-light">
+            <thead className=" alert bg-secondary">
               <tr>
                 <th scope="col">#ID</th>
                 <th scope="col">USERNAME</th>
