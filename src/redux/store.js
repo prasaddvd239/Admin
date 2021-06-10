@@ -9,9 +9,6 @@ import { PolicyReducer } from "./PolicyReducer";
 const rootReducer = combineReducers({
   customer: CustomerReducer,
   policy: PolicyReducer,
-
-  // depart : DepartRducer,
-  //vechil: VechuileReucer
 });
 
 // const store = createStore(rootReducer);
