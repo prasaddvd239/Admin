@@ -4,7 +4,6 @@ const initState = {
   refemp: {},
 };
 
-// ACTION TYPES
 const CUSTOMER_CREATE = "CUSTOMER_CREATE";
 const CUSTOMER_UPDATE = "CUSTOMER_UPDATE";
 const CUSTOMER_DELETE = "CUSTOMER_DELETE";
